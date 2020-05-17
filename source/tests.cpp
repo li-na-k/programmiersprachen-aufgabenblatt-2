@@ -2,11 +2,12 @@
 #include "../external/catch-1.1/catch.hpp"
 #include "vec2.hpp"
 
-Vec2 a;
-Vec2 b {5.1f, -9.3f};
+
 
 //Aufgabe 2.2 - Default Memberinitialisierung testen
 TEST_CASE("Vec2 Initialisierung", "[Vec2]"){
+  Vec2 a;
+  Vec2 b {5.1f, -9.3f};
   REQUIRE(a.x == 0.0f);
   REQUIRE(a.y == 0.0f); 
   REQUIRE(5.1f == Approx(b.x));
@@ -21,7 +22,7 @@ TEST_CASE("Vektoren-Addition", "[Addition]"){
   REQUIRE(a.x == Approx(8.3f));
   REQUIRE(a.y == Approx(-1.2f));
   Vec2 c {1.0f, 0.0f};
-  b += c; //Kommutativität überprüfen
+  b += c; //Kommutativitaet überprüfen
   REQUIRE(b.x == Approx(8.3f));
   REQUIRE(b.y == Approx(-1.2f));
   Vec2 d {-3.12f, -0.1f};
@@ -86,7 +87,101 @@ TEST_CASE("Division_durch_float", "[Division_durch_float]"){
   REQUIRE(b.y == Approx(-3.66666f));
 }
 
+//Aufgabe 2.4 - Freie Funktionen
+TEST_CASE("Freie_Funktion_Addition", "[Freie_Funktion_Addition]"){
+  Vec2 a {5.71f, 0.0f}; 
+  Vec2 b {7.2f, -10.8f};
+  Vec2 e1 = a + b;
+  REQUIRE(e1.x == Approx(12.91f));
+  REQUIRE(e1.y == Approx(-10.8f));
+  Vec2 c {7.44f, 0.9f};
+  Vec2 e2 = b + c;
+  Vec2 e3 = c + b; //Kommutativitaet testen
+  REQUIRE(e2.x == Approx(14.64f));
+  REQUIRE(e2.y == Approx(-9.9f));
+  REQUIRE(e3.x == Approx(14.64f));
+  REQUIRE(e3.y == Approx(-9.9f));
+}
+
+TEST_CASE("Freie_Funktion_Subtraktion", "[Freie_Funktion_Subtraktion]"){
+  Vec2 a {5.71f, 0.0f}; 
+  Vec2 b {7.2f, -10.8f};
+  Vec2 e1 = a - b;
+  REQUIRE(e1.x == Approx(-1.49f));
+  REQUIRE(e1.y == Approx(10.8f));
+  Vec2 e2 = a - a;
+  REQUIRE(e2.x == 0.0f);
+  REQUIRE(e2.y == 0.0f);
+  Vec2 c {7.44f, 0.9f};
+  Vec2 e3 = a - c ;
+  REQUIRE(e3.x == Approx(-1.73f));
+  REQUIRE(e3.y == Approx(-0.9f));
+}
+
+TEST_CASE("Freie_Funktion_Multiplikation", "[Freie_Funktion_Multiplikation]"){
+  Vec2 a {5.71f, 0.0f}; 
+  Vec2 b {7.2f, -10.8f};
+  float f1 = 0.5f;
+  float f2 = 0.0f;
+  float f3 = -3.1f;
+  Vec2 e1 = a * f1;
+  Vec2 e2 = b * f2;
+  Vec2 e3 = a * f2;
+  Vec2 e4 = b * f3;
+  REQUIRE(e1.x == Approx(2.855f));
+  REQUIRE(e1.y == 0.0f);
+  REQUIRE(e2.x == 0.0f);
+  REQUIRE(e2.y == 0.0f);
+  REQUIRE(e3.x == 0.0f);
+  REQUIRE(e3.y == 0.0f);
+  REQUIRE(e4.x == Approx(-22.32f));
+  REQUIRE(e4.y == Approx(33.48f));
+}
+
+TEST_CASE("Freie_Funktion_Division", "[Freie_Funktion_Division]"){
+  Vec2 a {5.71f, 0.0f}; 
+  Vec2 b {7.2f, -10.8f};
+  float f1 = 0.5f;
+  float f2 = 0.0f;
+  float f3 = -3.1f;
+  Vec2 e1 = a / f1;
+  Vec2 e2 = b / f2;
+  Vec2 e3 = a / f2;
+  Vec2 e4 = b / f3;
+  REQUIRE(e1.x == Approx(11.42f));
+  REQUIRE(e1.y == 0.0f);
+  REQUIRE(e2.x == Approx(7.2f));
+  REQUIRE(e2.y == Approx(-10.8f));
+  REQUIRE(e3.x == Approx(5.71f));
+  REQUIRE(e3.y == 0.0f);
+  REQUIRE(e4.x == Approx(-2.32258f));
+  REQUIRE(e4.y == Approx(3.48387f));
+}
+
+TEST_CASE("Freie_Funktion_Multiplikation2", "[Freie_Funktion_Multiplikation2]"){
+  Vec2 a {5.71f, 0.0f}; 
+  Vec2 b {7.2f, -10.8f};
+  float f1 = 0.5f;
+  float f2 = 0.0f;
+  float f3 = -3.1f;
+  Vec2 e1 = f1 * a;
+  Vec2 e2 = f2 * b;
+  Vec2 e3 = f2 * a;
+  Vec2 e4 = f3 * b;
+  REQUIRE(e1.x == Approx(2.855f));
+  REQUIRE(e1.y == 0.0f);
+  REQUIRE(e2.x == 0.0f);
+  REQUIRE(e2.y == 0.0f);
+  REQUIRE(e3.x == 0.0f);
+  REQUIRE(e3.y == 0.0f);
+  REQUIRE(e4.x == Approx(-22.32f));
+  REQUIRE(e4.y == Approx(33.48f));
+}
+
 int main(int argc, char *argv[])
 {
   return Catch::Session().run(argc, argv);
 }
+
+
+
