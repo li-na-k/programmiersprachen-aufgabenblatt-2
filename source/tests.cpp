@@ -219,6 +219,19 @@ TEST_CASE("FFunktion-Matrizen-Multiplikation", "[FFunktion-Matrizen-Multiplikati
   REQUIRE(e.e_11 == Approx(14.1f));
 }
 
+//Aufgabe 2.6
+TEST_CASE("Determinante_berechnen", "[det]"){
+  Mat2 a {2,7,5,1};
+  Mat2 b {0,2,-1,6};
+  Mat2 c {-2.2, 9.1, 6.45, 0.2};
+  Mat2 d {123.4567, 2, -0.1, 0.5};
+  REQUIRE(a.det() == Approx(-33.0f));
+  REQUIRE(b.det() == Approx(2.0f));
+  REQUIRE(c.det() == Approx(-59.135f));
+  REQUIRE(d.det() == Approx(61.9284f));
+}
+
+
 
 int main(int argc, char *argv[])
 {
