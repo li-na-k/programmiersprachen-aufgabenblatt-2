@@ -18,7 +18,7 @@ struct Mat2 {
     Mat2& operator*=(Mat2 const& m); 
 
     //Aufgabe 2.6
-    float det() const; //ändert das Objekt, auf das Methode aufgerufen, nicht.
+    float det() const; //ändert das Objekt, auf das Methode aufgerufen wird, nicht.
 
 };
 
@@ -27,10 +27,10 @@ struct Mat2 {
 Mat2 operator*(Mat2 const& m1, Mat2 const& m2);
 
 //Aufgabe 2.6
-/*Vec2 operator*(Mat2 const& m, Vec2 const& v); 
+Vec2 operator*(Mat2 const& m, Vec2 const& v); 
 Vec2 operator*(Vec2 const& v, Mat2 const& m); 
 Mat2 inverse(Mat2 const& m);
-Mat2 transpose(Mat2 const& m);
-Mat2 make_rotation_mat2(float phi); */
+//Mat2 transpose(Mat2 const& m);
+//Mat2 make_rotation_mat2(float phi);
 
 #endif

@@ -27,4 +27,30 @@ Mat2 operator*(Mat2 const& m1, Mat2 const& m2){
 }
 
 //Aufgabe 2.6
+Vec2 operator*(Mat2 const& m, Vec2 const& v){
+    Vec2 result;
+    result.x = m.e_00 * v.x + m.e_10 * v.y;
+    result.y = m.e_01 * v.x + m.e_11 * v.y;
+    return result;
+}
+
+Vec2 operator*(Vec2 const& v, Mat2 const& m){
+    return m*v;
+}
+
+Mat2 inverse(Mat2 const& m){
+    float d = m.det();
+    Mat2 result;
+    float temp00 = 1/d * m.e_11;
+    float temp10 = -1/d * m.e_10;
+    float temp01 = -1/d * m.e_01;
+    float temp11 = 1/d * m.e_00;
+    result.e_00 = temp00;
+    result.e_10 = temp10;
+    result.e_01 = temp01;
+    result.e_11 = temp11;
+    return result;
+}
+
+
 

@@ -182,20 +182,20 @@ TEST_CASE("Freie_Funktion_Multiplikation2", "[Freie_Funktion_Multiplikation2]"){
 
 //Aufgabe 2.5 - Matrizenmultiplikation
 TEST_CASE("Methode-Matrizen-Multiplikation", "[Methode-Matrizen-Multiplikation]"){
-  Mat2 a {2,7,5,1};
-  Mat2 b {0,2,-1,6};
+  Mat2 a {2.0f,7.0f,5.0f,1.0f};
+  Mat2 b {0.0f,2.0f,-1.0f,6.0f};
   a*=b;
   REQUIRE(a.e_00 == Approx(-7.0f));
   REQUIRE(a.e_10 == Approx(46.0f));
   REQUIRE(a.e_01 == Approx(-1.0f));
   REQUIRE(a.e_11 == Approx(16.0f));
-  Mat2 d {-2.2, 9.1, 6.45, 0.2};
+  Mat2 d {-2.2f, 9.1f, 6.45f, 0.2f};
   d *= b;
   REQUIRE(d.e_00 == Approx(-9.1f));
   REQUIRE(d.e_10 == Approx(50.2f));
   REQUIRE(d.e_01 == Approx(-0.2f));
   REQUIRE(d.e_11 == Approx(14.1f));
-  d = {-2.2, 9.1, 6.45, 0.2};
+  d = {-2.2f, 9.1f, 6.45f, 0.2f};
   b *= d;
   REQUIRE(b.e_00 == Approx(12.9f));
   REQUIRE(b.e_10 == Approx(0.4f));
@@ -204,14 +204,14 @@ TEST_CASE("Methode-Matrizen-Multiplikation", "[Methode-Matrizen-Multiplikation]"
 }
 
 TEST_CASE("FFunktion-Matrizen-Multiplikation", "[FFunktion-Matrizen-Multiplikation]"){
-  Mat2 a {2,7,5,1};
-  Mat2 b {0,2,-1,6};
+  Mat2 a {2.0f,7.0f,5.0f,1.0f};
+  Mat2 b {0.0f,2.0f,-1.0f,6.0f};
   Mat2 c = a * b;
   REQUIRE(c.e_00 == Approx(-7.0f));
   REQUIRE(c.e_10 == Approx(46.0f));
   REQUIRE(c.e_01 == Approx(-1.0f));
   REQUIRE(c.e_11 == Approx(16.0f));
-  Mat2 d {-2.2, 9.1, 6.45, 0.2};
+  Mat2 d {-2.2f, 9.1f, 6.45f, 0.2f};
   Mat2 e = d * b;
   REQUIRE(e.e_00 == Approx(-9.1f));
   REQUIRE(e.e_10 == Approx(50.2f));
@@ -221,14 +221,86 @@ TEST_CASE("FFunktion-Matrizen-Multiplikation", "[FFunktion-Matrizen-Multiplikati
 
 //Aufgabe 2.6
 TEST_CASE("Determinante_berechnen", "[det]"){
-  Mat2 a {2,7,5,1};
-  Mat2 b {0,2,-1,6};
-  Mat2 c {-2.2, 9.1, 6.45, 0.2};
-  Mat2 d {123.4567, 2, -0.1, 0.5};
+  Mat2 a {2.0f,7.0f,5.0f,1.0f};
+  Mat2 b {0.0f,2.0f,-1.0f,6.0f};
+  Mat2 c {-2.2f, 9.1f, 6.45f, 0.2f};
+  Mat2 d {123.4567f, 2.0f, -0.1f, 0.5f};
   REQUIRE(a.det() == Approx(-33.0f));
   REQUIRE(b.det() == Approx(2.0f));
   REQUIRE(c.det() == Approx(-59.135f));
   REQUIRE(d.det() == Approx(61.9284f));
+}
+
+TEST_CASE("Matrix-Vektor-Multiplikation", "[Matrix-Vektor-Multiplikation]"){
+  Mat2 a {2.0f,7.0f,5.0f,1.0f};
+  Mat2 b {0.0f,2.0f,-1.0f,6.0f};
+  Mat2 c {-2.2f, 9.1f, 6.45f, 0.2f};
+  Mat2 d {123.4567f, 2.0f, -0.1f, 0.5f};
+  Vec2 v1 {1.0f,2.0f};
+  Vec2 v2 {0.0f,-5.2f};
+  Vec2 v3 {2.1f, 3.6f};
+  Vec2 e1 = a * v1;
+  REQUIRE(e1.x == Approx(16.0f));
+  REQUIRE(e1.y == Approx(7.0f));
+  Vec2 e2 = b * v2;
+  REQUIRE(e2.x == Approx(-10.4f));
+  REQUIRE(e2.y == Approx(-31.2f));
+  Vec2 e3 = c * v2;
+  REQUIRE(e3.x == Approx(-47.32f));
+  REQUIRE(e3.y == Approx(-1.04f));
+  Vec2 e4 = d * v3;
+  REQUIRE(e4.x == Approx(266.46f));
+  REQUIRE(e4.y == Approx(1.59f));
+}
+
+TEST_CASE("Vektor-Matrix-Multiplikation", "[Vektor-Matrix-Multiplikation]"){
+  Mat2 a {2.0f,7.0f,5.0f,1.0f};
+  Mat2 b {0.0f,2.0f,-1.0f,6.0f};
+  Mat2 c {-2.2f, 9.1f, 6.45f, 0.2f};
+  Mat2 d {123.4567f, 2.0f, -0.1f, 0.5f};
+  Vec2 v1 {1.0f,2.0f};
+  Vec2 v2 {0.0f,-5.2f};
+  Vec2 v3 {2.1f, 3.6f};
+  Vec2 e1 = v1 * a;
+  REQUIRE(e1.x == Approx(16.0f));
+  REQUIRE(e1.y == Approx(7.0f));
+  Vec2 e2 = v2 * b;
+  REQUIRE(e2.x == Approx(-10.4f));
+  REQUIRE(e2.y == Approx(-31.2f));
+  Vec2 e3 = v2 * c;
+  REQUIRE(e3.x == Approx(-47.32f));
+  REQUIRE(e3.y == Approx(-1.04f));
+  Vec2 e4 = v3 * d;
+  REQUIRE(e4.x == Approx(266.46f));
+  REQUIRE(e4.y == Approx(1.59f));
+}
+
+
+TEST_CASE("Inverse", "[inverse]"){
+  Mat2 a {1.0f,2.0f,-2.0f,1.0f};
+  Mat2 b {0.0f,2.0f,-1.0f,6.0f};
+  Mat2 c {-2.2f, 9.1f, 6.45f, 0.2f};
+  Mat2 d {123.4567f, 2.0f, -0.1f, 0.5f};
+  Mat2 erg1 = inverse(a);
+  REQUIRE(erg1.e_00 == Approx(0.2f));
+  REQUIRE(erg1.e_10 == Approx(-0.4f));
+  REQUIRE(erg1.e_01 == Approx(0.4f));
+  REQUIRE(erg1.e_11 == Approx(0.2f));
+  Mat2 erg2 = inverse(b);
+  REQUIRE(erg2.e_00 == Approx(3.0f));
+  REQUIRE(erg2.e_10 == Approx(-1.0f));
+  REQUIRE(erg2.e_01 == Approx(0.5f));
+  REQUIRE(erg2.e_11 == Approx(0.0f));
+  Mat2 erg3 = inverse(c);
+  REQUIRE(erg3.e_00 == Approx(-0.00338f));
+  REQUIRE(erg3.e_10 == Approx(0.15389f));
+  REQUIRE(erg3.e_01 == Approx(0.10907f));
+  REQUIRE(erg3.e_11 == Approx(0.0372f));
+  Mat2 erg4 = inverse(d);
+  REQUIRE(erg4.e_00 == Approx(0.00807f));
+  REQUIRE(erg4.e_10 == Approx(-0.0323f));
+  REQUIRE(erg4.e_01 == Approx(0.00161f));
+  REQUIRE(erg4.e_11 == Approx(1.99354f));
 }
 
 
