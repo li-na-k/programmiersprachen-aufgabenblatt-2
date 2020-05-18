@@ -23,7 +23,7 @@ Vec2& Vec2::operator*=(float s){
 
 Vec2& Vec2::operator/=(float s){
     if(s == 0.0f){  //Division durch 0 abfangen
-        std::cout<<"Division durch Null nicht erlaubt. Keine Division ausgeführt. /n"; 
+        std::cout<<"Division durch Null nicht erlaubt. Keine Division ausgeführt. \n"; 
         return *this;
     }
     else{
@@ -54,7 +54,7 @@ Vec2 operator* (Vec2 const& v, float s){
 
 Vec2 operator/ (Vec2 const& v, float s){
     if(s == 0.0f){
-        std::cout << "Division durch Null nicht erlaubt. Keine Division ausgeführt. /n";
+        std::cout << "Division durch Null nicht erlaubt. Keine Division ausgeführt. \n";
         return v;
     }
     else{
