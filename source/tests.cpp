@@ -1,6 +1,7 @@
 #define CATCH_CONFIG_RUNNER
 #include "../external/catch-1.1/catch.hpp"
 #include "vec2.hpp"
+#include "mat2.hpp"
 
 
 
@@ -177,6 +178,47 @@ TEST_CASE("Freie_Funktion_Multiplikation2", "[Freie_Funktion_Multiplikation2]"){
   REQUIRE(e4.x == Approx(-22.32f));
   REQUIRE(e4.y == Approx(33.48f));
 }
+
+
+//Aufgabe 2.5 - Matrizenmultiplikation
+TEST_CASE("Methode-Matrizen-Multiplikation", "[Methode-Matrizen-Multiplikation]"){
+  Mat2 a {2,7,5,1};
+  Mat2 b {0,2,-1,6};
+  a*=b;
+  REQUIRE(a.e_00 == Approx(-7.0f));
+  REQUIRE(a.e_10 == Approx(46.0f));
+  REQUIRE(a.e_01 == Approx(-1.0f));
+  REQUIRE(a.e_11 == Approx(16.0f));
+  Mat2 d {-2.2, 9.1, 6.45, 0.2};
+  d *= b;
+  REQUIRE(d.e_00 == Approx(-9.1f));
+  REQUIRE(d.e_10 == Approx(50.2f));
+  REQUIRE(d.e_01 == Approx(-0.2f));
+  REQUIRE(d.e_11 == Approx(14.1f));
+  d = {-2.2, 9.1, 6.45, 0.2};
+  b *= d;
+  REQUIRE(b.e_00 == Approx(12.9f));
+  REQUIRE(b.e_10 == Approx(0.4f));
+  REQUIRE(b.e_01 == Approx(40.9f));
+  REQUIRE(b.e_11 == Approx(-7.9f));
+}
+
+TEST_CASE("FFunktion-Matrizen-Multiplikation", "[FFunktion-Matrizen-Multiplikation]"){
+  Mat2 a {2,7,5,1};
+  Mat2 b {0,2,-1,6};
+  Mat2 c = a * b;
+  REQUIRE(c.e_00 == Approx(-7.0f));
+  REQUIRE(c.e_10 == Approx(46.0f));
+  REQUIRE(c.e_01 == Approx(-1.0f));
+  REQUIRE(c.e_11 == Approx(16.0f));
+  Mat2 d {-2.2, 9.1, 6.45, 0.2};
+  Mat2 e = d * b;
+  REQUIRE(e.e_00 == Approx(-9.1f));
+  REQUIRE(e.e_10 == Approx(50.2f));
+  REQUIRE(e.e_01 == Approx(-0.2f));
+  REQUIRE(e.e_11 == Approx(14.1f));
+}
+
 
 int main(int argc, char *argv[])
 {
