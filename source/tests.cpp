@@ -304,6 +304,33 @@ TEST_CASE("Inverse", "[inverse]"){
 }
 
 
+TEST_CASE("Transpose_Matrix", "[transpose"){
+  Mat2 a {1.0f,2.0f,-2.0f,1.0f};
+  Mat2 b {0.0f,2.0f,-1.0f,6.0f};
+  Mat2 c {-2.2f, 9.1f, 6.45f, 0.2f};
+  Mat2 d {123.4567f, 2.0f, -0.1f, 0.5f};
+  Mat2 erg1 = transpose(a);
+  REQUIRE(erg1.e_00 == Approx(1.0f));
+  REQUIRE(erg1.e_10 == Approx(-2.0f));
+  REQUIRE(erg1.e_01 == Approx(2.0f));
+  REQUIRE(erg1.e_11 == Approx(1.0f));
+  Mat2 erg2 = transpose(b);
+  REQUIRE(erg2.e_00 == Approx(0.0f));
+  REQUIRE(erg2.e_10 == Approx(-1.0f));
+  REQUIRE(erg2.e_01 == Approx(2.0f));
+  REQUIRE(erg2.e_11 == Approx(6.0f));
+  Mat2 erg3 = transpose(c);
+  REQUIRE(erg3.e_00 == Approx(-2.2f));
+  REQUIRE(erg3.e_10 == Approx(6.45f));
+  REQUIRE(erg3.e_01 == Approx(9.1f));
+  REQUIRE(erg3.e_11 == Approx(0.2f));
+  Mat2 erg4 = transpose(d);
+  REQUIRE(erg4.e_00 == Approx(123.456f));
+  REQUIRE(erg4.e_10 == Approx(-0.1f));
+  REQUIRE(erg4.e_01 == Approx(2.0f));
+  REQUIRE(erg4.e_11 == Approx(0.5f));
+}
+
 
 int main(int argc, char *argv[])
 {
