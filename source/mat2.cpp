@@ -41,14 +41,10 @@ Vec2 operator*(Vec2 const& v, Mat2 const& m){
 Mat2 inverse(Mat2 const& m){
     float d = m.det();
     Mat2 result;
-    float temp00 = 1/d * m.e_11;
-    float temp10 = -1/d * m.e_10;
-    float temp01 = -1/d * m.e_01;
-    float temp11 = 1/d * m.e_00;
-    result.e_00 = temp00;
-    result.e_10 = temp10;
-    result.e_01 = temp01;
-    result.e_11 = temp11;
+    result.e_00 = 1/d * m.e_11;
+    result.e_10 = -1/d * m.e_10;
+    result.e_01 = -1/d * m.e_01;
+    result.e_11 = 1/d * m.e_00;
     return result;
 }
 
