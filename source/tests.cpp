@@ -2,6 +2,7 @@
 #include "../external/catch-1.1/catch.hpp"
 #include "vec2.hpp"
 #include "mat2.hpp"
+#include "color.hpp"
 
 
 //Aufgabe 2.2 - Default Memberinitialisierung testen
@@ -395,7 +396,17 @@ TEST_CASE("Rotationsmatrix", "[make_rotation_mat2]"){
   REQUIRE(e.e_10 == Approx(-0.92020f));
   REQUIRE(e.e_01 == Approx(0.92020f));
   REQUIRE(e.e_11 == Approx(-0.39144f));
+}
 
+TEST_CASE("color_rgb_initialierung", "[color_rgb]"){
+  color a;
+  REQUIRE(a.r == Approx(0.63f));
+  REQUIRE(a.g == Approx(0.63f));
+  REQUIRE(a.b == Approx(0.63f));
+  color b {0.1f,0.54f,0.1f};
+  REQUIRE(b.r == Approx(0.1f));
+  REQUIRE(b.g == Approx(0.54f));
+  REQUIRE(b.b == Approx(0.1f));
 }
 
 int main(int argc, char *argv[])
