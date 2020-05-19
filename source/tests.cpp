@@ -4,7 +4,6 @@
 #include "mat2.hpp"
 
 
-
 //Aufgabe 2.2 - Default Memberinitialisierung testen
 TEST_CASE("Vec2 Initialisierung", "[Vec2]"){
   Vec2 a;
@@ -31,6 +30,7 @@ TEST_CASE("Vektoren-Addition", "[Addition]"){
   d+=e;
   REQUIRE(d.x == Approx(-4.57f));
   REQUIRE(d.y == Approx(9.8f));
+  d+=a;
 }
 
 
@@ -47,6 +47,9 @@ TEST_CASE("Vektoren-Subtraktion", "[Subtraktion]"){
   REQUIRE(d.y == Approx(-8.48f));
   REQUIRE(c.x == Approx(-4.2f));
   REQUIRE(c.y == Approx(7.98f));
+  c-=d;
+  REQUIRE(c.x == Approx(-8.4f));
+  REQUIRE(c.y == Approx(16.46f));
 }
 
 
@@ -65,6 +68,9 @@ TEST_CASE("Mulitplikation_mit_float", "[Mulitplikation-mit_float]"){
   REQUIRE(b.x == Approx(0.24f));
   REQUIRE(b.y == Approx(-21.12f));
   c *= f1;
+  REQUIRE(c.x == 0.0f);
+  REQUIRE(c.y == 0.0f);
+  c *= f4;
   REQUIRE(c.x == 0.0f);
   REQUIRE(c.y == 0.0f);
 }
@@ -86,6 +92,9 @@ TEST_CASE("Division_durch_float", "[Division_durch_float]"){
   b /= f3;
   REQUIRE(b.x == Approx(0.041666f));
   REQUIRE(b.y == Approx(-3.66666f));
+  b /= f4;
+  REQUIRE(b.x == Approx(0.041666f));
+  REQUIRE(b.y == Approx(-3.66666f));
 }
 
 //Aufgabe 2.4 - Freie Funktionen
@@ -102,6 +111,10 @@ TEST_CASE("Freie_Funktion_Addition", "[Freie_Funktion_Addition]"){
   REQUIRE(e2.y == Approx(-9.9f));
   REQUIRE(e3.x == Approx(14.64f));
   REQUIRE(e3.y == Approx(-9.9f));
+  Vec2 d {1.49f, 2.98f};
+  Vec2 e4 = d + c;
+  REQUIRE(e4.x == Approx(8.93f));
+  REQUIRE(e4.y == Approx(3.88f));
 }
 
 TEST_CASE("Freie_Funktion_Subtraktion", "[Freie_Funktion_Subtraktion]"){
@@ -117,6 +130,9 @@ TEST_CASE("Freie_Funktion_Subtraktion", "[Freie_Funktion_Subtraktion]"){
   Vec2 e3 = a - c ;
   REQUIRE(e3.x == Approx(-1.73f));
   REQUIRE(e3.y == Approx(-0.9f));
+  Vec2 e4 = b - a;
+  REQUIRE(e4.x == Approx(1.49f));
+  REQUIRE(e4.y == Approx(-10.8f));
 }
 
 TEST_CASE("Freie_Funktion_Multiplikation", "[Freie_Funktion_Multiplikation]"){
@@ -201,6 +217,12 @@ TEST_CASE("Methode-Matrizen-Multiplikation", "[Methode-Matrizen-Multiplikation]"
   REQUIRE(b.e_10 == Approx(0.4f));
   REQUIRE(b.e_01 == Approx(40.9f));
   REQUIRE(b.e_11 == Approx(-7.9f));
+  Mat2 e {8.3, 0, 0, 0};
+  e *= d;
+  REQUIRE(e.e_00 == Approx(-18.26f));
+  REQUIRE(e.e_10 == Approx(75.53f));
+  REQUIRE(e.e_01 == 0.0f);
+  REQUIRE(e.e_11 == 0.0f);
 }
 
 TEST_CASE("FFunktion-Matrizen-Multiplikation", "[FFunktion-Matrizen-Multiplikation]"){
@@ -217,6 +239,17 @@ TEST_CASE("FFunktion-Matrizen-Multiplikation", "[FFunktion-Matrizen-Multiplikati
   REQUIRE(e.e_10 == Approx(50.2f));
   REQUIRE(e.e_01 == Approx(-0.2f));
   REQUIRE(e.e_11 == Approx(14.1f));
+  Mat2 f = b * a; //Matrizenmultiplikation nicht kommutativ
+  REQUIRE(f.e_00 == Approx(10.0f));
+  REQUIRE(f.e_10 == Approx(2.0f));
+  REQUIRE(f.e_01 == Approx(28.0f));
+  REQUIRE(f.e_11 == Approx(-1.0f));
+  Mat2 g {8.3, 0, 0, 0};
+  Mat2 h = d * g;
+  REQUIRE(f.e_00 == Approx(10.0f));
+  REQUIRE(f.e_10 == Approx(2.0f));
+  REQUIRE(f.e_01 == Approx(28.0f));
+  REQUIRE(f.e_11 == Approx(-1.0f));
 }
 
 //Aufgabe 2.6
@@ -290,7 +323,7 @@ TEST_CASE("Inverse", "[inverse]"){
   REQUIRE(erg2.e_00 == Approx(3.0f));
   REQUIRE(erg2.e_10 == Approx(-1.0f));
   REQUIRE(erg2.e_01 == Approx(0.5f));
-  REQUIRE(erg2.e_11 == Approx(0.0f));
+  REQUIRE(erg2.e_11 == 0.0f);
   Mat2 erg3 = inverse(c);
   REQUIRE(erg3.e_00 == Approx(-0.00338f));
   REQUIRE(erg3.e_10 == Approx(0.15389f));
@@ -304,7 +337,7 @@ TEST_CASE("Inverse", "[inverse]"){
 }
 
 
-TEST_CASE("Transpose_Matrix", "[transpose"){
+TEST_CASE("Transpose_Matrix", "[transpose]"){
   Mat2 a {1.0f,2.0f,-2.0f,1.0f};
   Mat2 b {0.0f,2.0f,-1.0f,6.0f};
   Mat2 c {-2.2f, 9.1f, 6.45f, 0.2f};
@@ -315,7 +348,7 @@ TEST_CASE("Transpose_Matrix", "[transpose"){
   REQUIRE(erg1.e_01 == Approx(2.0f));
   REQUIRE(erg1.e_11 == Approx(1.0f));
   Mat2 erg2 = transpose(b);
-  REQUIRE(erg2.e_00 == Approx(0.0f));
+  REQUIRE(erg2.e_00 == 0.0f);
   REQUIRE(erg2.e_10 == Approx(-1.0f));
   REQUIRE(erg2.e_01 == Approx(2.0f));
   REQUIRE(erg2.e_11 == Approx(6.0f));
@@ -331,6 +364,39 @@ TEST_CASE("Transpose_Matrix", "[transpose"){
   REQUIRE(erg4.e_11 == Approx(0.5f));
 }
 
+
+TEST_CASE("Rotationsmatrix", "[make_rotation_mat2]"){
+  Mat2 a = make_rotation_mat2 (2 * M_PI); //360 Grad
+  REQUIRE(Approx(a.e_00) == 1.0f);
+  REQUIRE(Approx(a.e_10) == 0.0f);
+  REQUIRE(Approx(a.e_01) == 0.0f);
+  REQUIRE(Approx(a.e_11) == 1.0f);
+
+  Mat2 b = make_rotation_mat2(1.570796327); //90 Grad
+  REQUIRE(b.e_00 == Approx(0.0f));
+  REQUIRE(b.e_10 == Approx(-1.0f));
+  REQUIRE(b.e_01 == Approx(1.0f));
+  REQUIRE(b.e_11 == Approx(0.0f));
+
+  Mat2 c = make_rotation_mat2(0.0174533); //1 Grad: 1/180 * M_PI
+  REQUIRE(c.e_00 == Approx(0.9998476f));
+  REQUIRE(c.e_10 == Approx(-0.017452f));
+  REQUIRE(c.e_01 == Approx(0.017452f));
+  REQUIRE(c.e_11 == Approx(0.999847f));
+
+  Mat2 d = make_rotation_mat2(-5.0f); 
+  REQUIRE(d.e_00 == Approx(0.28366f));
+  REQUIRE(d.e_10 == Approx(-0.958924f));
+  REQUIRE(d.e_01 == Approx(0.958924f));
+  REQUIRE(d.e_11 == Approx(0.28366f));
+
+  Mat2 e = make_rotation_mat2(1.973f); 
+  REQUIRE(e.e_00 == Approx(-0.39144f));
+  REQUIRE(e.e_10 == Approx(-0.92020f));
+  REQUIRE(e.e_01 == Approx(0.92020f));
+  REQUIRE(e.e_11 == Approx(-0.39144f));
+
+}
 
 int main(int argc, char *argv[])
 {
