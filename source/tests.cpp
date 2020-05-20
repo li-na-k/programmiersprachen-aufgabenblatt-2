@@ -3,7 +3,8 @@
 #include "vec2.hpp"
 #include "mat2.hpp"
 #include "color.hpp"
-
+#include "circle.hpp"
+#include "rectangle.hpp"
 
 //Aufgabe 2.2 - Default Memberinitialisierung testen
 TEST_CASE("Vec2 Initialisierung", "[Vec2]"){
@@ -399,14 +400,29 @@ TEST_CASE("Rotationsmatrix", "[make_rotation_mat2]"){
 }
 
 TEST_CASE("color_rgb_initialierung", "[color_rgb]"){
-  color a;
+  Color a;
   REQUIRE(a.r == Approx(0.63f));
   REQUIRE(a.g == Approx(0.63f));
   REQUIRE(a.b == Approx(0.63f));
-  color b {0.1f,0.54f,0.1f};
+  Color b {0.1f,0.54f,0.1f};
   REQUIRE(b.r == Approx(0.1f));
   REQUIRE(b.g == Approx(0.54f));
   REQUIRE(b.b == Approx(0.1f));
+}
+
+TEST_CASE("circle_circumference", "[circle_circumference]"){
+  Circle c1 {{0.5f,0.5f},0.5f,{0.2f,0.6f,0.1f}}; // ist das richtig??
+  float a = c1.circumference();
+  REQUIRE(a == Approx(M_PI));
+  Circle c2 {{0.0f,0.0f},20.0f,{0.4f,0.1f,0.7f}};
+  float b = c2.circumference();
+  REQUIRE(b == Approx(125.663706f));
+  Circle c3 {{0.9f,0.12f},0.0f,{0.2f,0.1f,0.7f}};
+  float c = c3.circumference();
+  REQUIRE(c == 0.0f);
+  Circle c4 {{0.9f,0.12f},-7.0f,{0.2f,0.1f,0.7f}}; //
+  float d = c4.circumference();
+  REQUIRE(c == 0.0f);
 }
 
 int main(int argc, char *argv[])
