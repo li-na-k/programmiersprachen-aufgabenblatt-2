@@ -2,10 +2,12 @@
 #include <GLFW/glfw3.h>
 #include <utility>
 #include <cmath>
-
+#include "rectangle.hpp"
+#include "circle.hpp"
 
 int main(int argc, char* argv[])
 {
+
   Window win{std::make_pair(800,800)};
 
   while (!win.should_close()) {
@@ -52,7 +54,14 @@ int main(int argc, char* argv[])
     
     win.draw_text(text_offset_x, text_offset_y, font_size, display_text);
 
+    //mein Rectangle & Circle
+    repo2::Rectangle rect{{100.0f, 100.0f}, {200.0f, 200.0f}, {0.3f, 0.2f, 0.1f}};
+    rect.draw(win);
+    Circle circle1{{400.0f, 400.0f}, 50.0f, {1.0f, 0.0f, 0.0f}};
+    circle1.draw(win);
+
     win.update();
+
   }
 
   return 0;
