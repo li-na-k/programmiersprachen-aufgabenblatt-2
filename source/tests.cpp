@@ -411,7 +411,7 @@ TEST_CASE("color_rgb_initialierung", "[color_rgb]"){
 }
 
 TEST_CASE("circle_circumference", "[circle_circumference]"){
-  Circle c1 {{0.5f,0.5f},0.5f,{0.2f,0.6f,0.1f}}; // ist das richtig??
+  Circle c1 {{0.5f,0.5f},0.5f,{0.2f,0.6f,0.1f}}; 
   float a = c1.circumference();
   REQUIRE(a == Approx(M_PI));
   Circle c2 {{0.0f,0.0f},20.0f,{0.4f,0.1f,0.7f}};
@@ -423,6 +423,15 @@ TEST_CASE("circle_circumference", "[circle_circumference]"){
   Circle c4 {{0.9f,0.12f},-7.0f,{0.2f,0.1f,0.7f}}; //
   float d = c4.circumference();
   REQUIRE(c == 0.0f);
+}
+
+TEST_CASE("rectangle_circumference", "[rectangle_circumference]"){
+  repo2::Rectangle rect1{{100.0f, 100.0f}, {200.0f, 200.0f}, {0.3f, 0.2f, 0.1f}};
+  float a = rect1.circumference();
+  REQUIRE(a == Approx(400.0f));
+  repo2::Rectangle rect2{{123.8f, 123.8f}, {226.0f, 200.0f}, {0.3f, 0.2f, 0.1f}};
+  float b = rect2.circumference();
+  REQUIRE(b == Approx(356.79999f));
 }
 
 int main(int argc, char *argv[])
