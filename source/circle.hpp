@@ -10,6 +10,7 @@ class Circle{
        Circle();
        float circumference() const;
        void draw(Window const& win) const;
+       void draw(Window const& win, float thickness) const;
 
     private:
        Vec2 center_;

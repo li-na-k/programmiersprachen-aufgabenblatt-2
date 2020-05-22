@@ -12,6 +12,7 @@ namespace repo2{
         Rectangle();
         float circumference() const;
         void draw(Window const& win) const;
+        void draw(Window const& win, float thickness) const;
         
         private:
         Vec2 min_; //linke untere Ecke      
