@@ -434,6 +434,42 @@ TEST_CASE("rectangle_circumference", "[rectangle_circumference]"){
   REQUIRE(b == Approx(356.79999f));
 }
 
+TEST_CASE("is_inside_rectangle", "[is_inside_rectangle]"){
+  repo2::Rectangle rect1{{100.0f, 200.0f}, {300.0f, 400.0f}, {0.9f, 0.0f, 0.0f}};
+  Vec2 point1 {200.0f, 300.0f};
+  bool a = rect1.is_inside(point1);
+  REQUIRE(a == true);
+  Vec2 point2 {200.0f, 412.0f};
+  bool b = rect1.is_inside(point2);
+  REQUIRE(b == false);
+  Vec2 point3 {200.0f, 200.0f}; //genau auf Linie
+  bool c = rect1.is_inside(point3);
+  REQUIRE(c == false);
+  Vec2 point4 {200.0f, 199.9f}; //knapp neben Linie
+  bool d = rect1.is_inside(point4);
+  REQUIRE(d == false);
+}
+
+TEST_CASE("is_inside_circle", "[is_inside_circle]"){
+  Circle c1 {{0.5f,0.5f},12.0f,{0.2f,0.6f,0.1f}}; 
+  Vec2 point1 {1.3f, 2.1f};
+  bool a = c1.is_inside(point1);
+  REQUIRE(a == true);
+  Vec2 point2 {25.0f, 2.1f};
+  bool b = c1.is_inside(point2);
+  REQUIRE(b == false);
+  Circle c2 {{0.0f,0.0f},0.5f,{0.2f,0.6f,0.1f}}; 
+  Vec2 point3 {0.5f, 0.0f}; //auf Linie
+  bool c = c2.is_inside(point3);
+  REQUIRE(c == false);
+  Vec2 point4 {0.49f, 0.0f}; //knapp drinnen
+  bool d = c2.is_inside(point4);
+  REQUIRE(d == true);
+  Vec2 point5 {0.51f, 0.0f}; //knapp außen
+  bool e = c2.is_inside(point5);
+  REQUIRE(e == false);
+}
+
 int main(int argc, char *argv[])
 {
   return Catch::Session().run(argc, argv);
