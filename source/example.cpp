@@ -4,6 +4,7 @@
 #include <cmath>
 #include "rectangle.hpp"
 #include "circle.hpp"
+#include <vector> 
 
 int main(int argc, char* argv[])
 {
@@ -54,11 +55,44 @@ int main(int argc, char* argv[])
     
     win.draw_text(text_offset_x, text_offset_y, font_size, display_text);
 
+    //Vektor for storing all circle objects
+    std::vector<Circle> myCircles;
+    
+    //Vektor for storing all rectangle objects
+    std::vector<repo2::Rectangle> myRectangles;
+
+
     //mein Rectangle & Circle
     repo2::Rectangle rect{{100.0f, 100.0f}, {200.0f, 200.0f}, {0.3f, 0.2f, 0.1f}};
     rect.draw(win);
+    myRectangles.push_back(rect); 
     Circle circle1{{400.0f, 400.0f}, 50.0f, {1.0f, 0.0f, 0.0f}};
     circle1.draw(win);
+    myCircles.push_back(circle1); 
+
+    //dickerer Rand
+    Circle circle2{{100.0f, 200.0f}, 50.0f, {0.0f, 7.0f, 0.0f}};
+    circle2.draw(win, 3.0f);
+    myCircles.push_back(circle2); 
+    repo2::Rectangle rect2{{400.0f, 250.0f}, {600.0f, 300.0f}, {0.9f, 0.0f, 0.1f}};
+    rect2.draw(win, 2.0f);
+    myRectangles.push_back(rect2); 
+
+    //dickerer Rand bei Hover über Objekt
+    Vec2 mouse {static_cast<float>(mouse_position.first), static_cast<float>(mouse_position.second)};
+    for(int i = 0; i < myCircles.size(); ++i){
+      if(myCircles[i].is_inside(mouse)){
+      myCircles[i].draw(win,5.0f);
+      }
+    }
+
+    //dickerer Rand bei Hover über Objekt
+    for(int i = 0; i < myRectangles.size(); ++i){
+      if(myRectangles[i].is_inside(mouse)){
+      myRectangles[i].draw(win,5.0f);
+      }
+    }
+
 
     win.update();
 
