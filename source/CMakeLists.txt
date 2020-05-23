@@ -35,4 +35,20 @@ target_link_libraries(tests
   ${OPENGL_LIBRARIES}
   )
 
-
+# Build uhr
+add_executable(uhr
+  window.cpp
+  glew.c
+  uhr.cpp
+  vec2.cpp
+  mat2.cpp
+  rectangle.cpp
+  circle.cpp
+  )
+target_link_libraries(uhr
+  glfw
+  ${GLFW_LIBRARIES}
+  nanovg
+  ${OPENGL_LIBRARIES}
+  )
+add_dependencies(uhr glfw nanovg ${COPY_BINARY})
