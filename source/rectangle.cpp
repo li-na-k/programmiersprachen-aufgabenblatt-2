@@ -27,10 +27,6 @@ namespace repo2{
         win.draw_line(max_.x, max_.y, max_.x, min_.y, color_.r,color_.g, color_.b, thickness);
     }
 
-     void Rectangle::draw(Window const& win) const{
-        Rectangle::draw(win, 1.0f);
-    }
-
     bool Rectangle::is_inside(Vec2 const& point) const{  //auf Linie != inside
         if(point.x > min_.x && point.x < max_.x && point.y > min_.y && point.y < max_.y){
             return true;

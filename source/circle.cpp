@@ -34,11 +34,6 @@ void Circle::draw(Window const& win, float thickness) const{
    }
 }
 
-void Circle::draw(Window const& win) const{
-    Circle::draw(win, 1.0f);
-}
-
-
 bool Circle::is_inside(Vec2 const& point) const{  //auf Linie != inside
    Vec2 verbindung {point.x - center_.x, point.y - center_.y}; //Verbindunksvektor zw. Punkt u. Radius
    if((sqrt(pow(verbindung.x,2) + pow(verbindung.y,2))) < radius_){ //Laenge d. Verbindungsvektors < Radius?
