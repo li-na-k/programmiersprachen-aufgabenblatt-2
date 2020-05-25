@@ -1,10 +1,10 @@
 #define CATCH_CONFIG_RUNNER
-#include "../external/catch-1.1/catch.hpp"
 #include "vec2.hpp"
 #include "mat2.hpp"
 #include "color.hpp"
 #include "circle.hpp"
 #include "rectangle.hpp"
+#include "../external/catch-1.1/catch.hpp"
 
 //Aufgabe 2.2 - Default Memberinitialisierung testen
 TEST_CASE("Vec2 Initialisierung", "[Vec2]"){

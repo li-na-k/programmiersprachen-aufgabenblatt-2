@@ -1,8 +1,8 @@
 #include "circle.hpp"
-#include <cmath>
 #include "window.hpp"
 #include "mat2.hpp"
 #include "vec2.hpp"
+#include <cmath>
 
 Circle::Circle() :
   center_ {0.0f, 0.0f},

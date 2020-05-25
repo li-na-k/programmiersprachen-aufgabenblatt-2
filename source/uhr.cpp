@@ -1,11 +1,11 @@
 #include "window.hpp"
-#include <GLFW/glfw3.h>
-#include <utility>
-#include <cmath>
 #include "rectangle.hpp"
 #include "circle.hpp"
 #include "mat2.hpp"
 #include "vec2.hpp"
+#include <GLFW/glfw3.h>
+#include <utility>
+#include <cmath>
 
 int main(int argc, char* argv[])
 {

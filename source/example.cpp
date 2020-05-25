@@ -1,9 +1,9 @@
 #include "window.hpp"
+#include "rectangle.hpp"
+#include "circle.hpp"
 #include <GLFW/glfw3.h>
 #include <utility>
 #include <cmath>
-#include "rectangle.hpp"
-#include "circle.hpp"
 #include <vector> 
 
 int main(int argc, char* argv[])

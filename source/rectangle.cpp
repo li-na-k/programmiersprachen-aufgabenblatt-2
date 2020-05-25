@@ -1,6 +1,6 @@
 #include "rectangle.hpp"
-#include <cmath>
 #include "window.hpp"
+#include <cmath>
 
 namespace repo2{
     Rectangle::Rectangle(Vec2 const& min, Vec2 const& max, Color const& clr) : 
