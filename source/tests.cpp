@@ -408,6 +408,14 @@ TEST_CASE("color_rgb_initialierung", "[color_rgb]"){
   REQUIRE(b.r == Approx(0.1f));
   REQUIRE(b.g == Approx(0.54f));
   REQUIRE(b.b == Approx(0.1f));
+  Color c {1.0f,1.0f,1.0f};
+  REQUIRE(c.r == Approx(1.0f));
+  REQUIRE(c.g == Approx(1.0f));
+  REQUIRE(c.b == Approx(1.0f));
+  Color d {0.0f,0.4f};
+  REQUIRE(d.r == Approx(0.0f));
+  REQUIRE(d.g == Approx(0.4f));
+  REQUIRE(d.b == Approx(0.63f));
 }
 
 TEST_CASE("circle_circumference", "[circle_circumference]"){
@@ -432,6 +440,12 @@ TEST_CASE("rectangle_circumference", "[rectangle_circumference]"){
   repo2::Rectangle rect2{{123.8f, 123.8f}, {226.0f, 200.0f}, {0.3f, 0.2f, 0.1f}};
   float b = rect2.circumference();
   REQUIRE(b == Approx(356.79999f));
+  repo2::Rectangle rect3{{0.0f, -100.0f}, {100.0, 200.0f}, {0.2f, 0.2f, 0.9f}};
+  float c = rect3.circumference();
+  REQUIRE(c == Approx(800.0f));
+  repo2::Rectangle rect4{{0.0, 27.1f}, {199.0f, 650.0f}, {0.4f, 0.9f, 0.9f}};
+  float d = rect4.circumference();
+  REQUIRE(d == Approx(1643.8f));
 }
 
 TEST_CASE("is_inside_rectangle", "[is_inside_rectangle]"){
