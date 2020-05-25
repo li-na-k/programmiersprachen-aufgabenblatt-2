@@ -58,13 +58,13 @@ int main(int argc, char* argv[])
 
     //draw clock
     Vec2 center{400,400};
-    Circle circle1{{center}, 300.0f, {0.0f, 0.5f, 0.8f}};
-    circle1.draw(win);
+    Circle clock{{center}, 300.0f, {0.0f, 0.5f, 0.8f}};
+    clock.draw(win);
 
     //Rotationsmatrix 
-    //Eine Minute auf Radius = 6 Deg = 0,10472 Rad 
+    //Winkel zwischen zwei Minuten-Strichen auf Uhr = 6 Deg = 0,10472 Rad 
     const float rad_minute = 0.1047f;
-    Mat2 rotmax = make_rotation_mat2(rad_minute);
+    const Mat2 rotmax = make_rotation_mat2(rad_minute);
 
     //find how many sec / minutes / hours have gone by
     int aktuelle_sek = win.get_time(); //cast to int
