@@ -31,7 +31,7 @@ namespace repo2{
         Rectangle::draw(win, 1.0f);
     }
 
-    bool Rectangle::is_inside(Vec2 const& point){  //auf Linie != inside
+    bool Rectangle::is_inside(Vec2 const& point) const{  //auf Linie != inside
         if(point.x > min_.x && point.x < max_.x && point.y > min_.y && point.y < max_.y){
             return true;
         }
