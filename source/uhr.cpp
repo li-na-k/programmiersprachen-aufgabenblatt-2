@@ -62,7 +62,7 @@ int main(int argc, char* argv[])
     clock.draw(win);
 
     //Rotationsmatrix 
-    //Winkel zwischen zwei Minuten-Strichen auf Uhr = 6 Deg = 0,10472 Rad 
+    //Winkel zwischen zwei Minuten-Strichen auf Uhr = 6 Deg = 0.10472 Rad 
     const float rad_minute = 0.1047f;
     const Mat2 rotmax = make_rotation_mat2(rad_minute);
 
