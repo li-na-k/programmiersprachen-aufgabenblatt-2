@@ -20,7 +20,7 @@ float Circle::circumference() const{
     return 2 * M_PI * radius_;
 }
 
-void Circle::draw(Window const& win, float thickness) const{
+void Circle::draw(Window& win, float thickness) const{
     Vec2 start_point {center_.x, center_.y + radius_};
     int ANZAHL_SEGMENTE = 500;
     Mat2 rotationsmatrix = make_rotation_mat2(360*M_PI/180/ANZAHL_SEGMENTE); //360 Grad in Bogenmaß / Anzahl der Segmente => Länge der Segmente

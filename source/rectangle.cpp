@@ -20,7 +20,7 @@ namespace repo2{
     }
 
 
-    void Rectangle::draw(Window const& win, float thickness) const{
+    void Rectangle::draw(Window& win, float thickness) const{
         win.draw_line(min_.x, min_.y, max_.x, min_.y, color_.r,color_.g, color_.b, thickness);
         win.draw_line(min_.x, min_.y, min_.x, max_.y, color_.r,color_.g, color_.b, thickness);
         win.draw_line(min_.x, max_.y, max_.x, max_.y, color_.r,color_.g, color_.b, thickness);
